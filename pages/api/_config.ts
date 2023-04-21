@@ -119,7 +119,7 @@ export const fs_episodes_app = [
   },
 ];
 //番剧剧集数据(WEB端API) 在官方WEB中，long_title与index_title设置可能无效，显示的为title (显示为：index_title空格long_title) ；cover不显示
-//此处参考 https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/search/search_response.md#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B2-%E7%BB%93%E6%9E%9C%E4%B8%BA%E7%95%AA%E5%89%A7%E5%BD%B1%E8%A7%86
+//此处参考 https://socialsisteryi.github.io/bilibili-API-collect/docs/search/search_response.html#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B2-%E7%BB%93%E6%9E%9C%E4%B8%BA%E7%95%AA%E5%89%A7-%E5%BD%B1%E8%A7%86
 export const fs_episodes_web = [
   {
     id: 1,
@@ -176,15 +176,28 @@ export const fs_episodes_web = [
 ];
 //============================================================
 
+//===========================小工具============================
+//尝试解除下载速度限制(替换下载链接中bw=1280000),略影响性能
+export const try_unblock_CDN_speed_enabled: io = 1;
+//============================================================
+
 //===========================数据库============================
-//支持 本地模式(日志、缓存)、NOTION(日志、黑名单)、bit.io(TODO)
-//缓存时间 单位：分钟(min) 需打开缓存数据库
+//支持 本地模式(日志、缓存)、NOTION(日志、黑名单)、PostgreSOL(日志、缓存、黑名单)
+//注：本地模式 与 PostgreSQL 优先本地
+//缓存时间 单位：15分钟(min) 需打开缓存数据库 仅当deadline不存在时生效
 export const cache_time = 1000 * 60 * 15;
 //本地模式设置
 //本地模式开关
-export const db_local_enabled: io = 1;
+export const db_local_enabled: io = 0;
 //本地数据库查询密钥
 export const local_cache_secret = process.env.local_cache_secret || "";
+//PostgreSQL配置(需Read/Write权限)
+import { Pool } from "pg"; //导入(不用改)
+export const db_bitio_enabled: io = 0; //启用postgresql数据库
+const connectionString =
+  process.env.db_bitio_pool ||
+  "postgresql://用户名:秘钥@服务器域名:端口/数据库名"; //配置数据库链接
+export const db_bitio_pool = new Pool({ connectionString, ssl: true }); //导出(不用改)
 //NOTION数据库配置
 //NOTION KEY
 export const NOTION_KEY =
@@ -252,4 +265,13 @@ export const block = (code: number) => {
 };
 //============================================================
 
-export const version = "2.1.2-opt"
+//===================日志函数(不用改)===========================
+export const log = {
+  str: (info: string, data: string) => console.log(info, data),
+  obj: (info: string, data: Object) => console.log(info, JSON.stringify(data)),
+};
+//============================================================
+
+//===================信息展示(不用改)===========================
+export const version = "2.2.5";
+//============================================================

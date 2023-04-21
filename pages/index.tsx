@@ -1,9 +1,9 @@
-import { ver_min, version } from "./api/_config";
+import { version, ver_min } from "./api/_config";
 function HomePage() {
   return (
     <>
       <div className="content">
-        <h1>BiliRoaming Service</h1>
+        <h1>BiliRoaming Service (TS)</h1>
         <h2>信息展示</h2>
         当前后端版本: {version}
         <br />

@@ -1,6 +1,6 @@
 # biliroaming-serve-ts-vercel
 
-本服务部署在Vercel香港节点上。  
+本服务部署在Vercel香港节点上，同时支持Next.js本地部署。  
 配置修改在 `pages/api/_config.ts` 中，可以直接改里面的配置文本，也可在Vercel里添加对应名称变量。  
 使用环境变量更安全。  
 
@@ -8,9 +8,10 @@
 
 - 支持软件：BiliRoaming、油猴脚本、哔哩(Bili.uwp)、BBDown
 - 支持仅Cookie鉴权(目前未发现其他支持此功能服务)
-- 代理HK/TH地区番剧(目前Vercel仅提供`hkg1` `sin1`节点)
+- 尝试解除下载速度限制(方法见[BiliRoaming](https://github.com/yujincheng08/BiliRoaming/pull/1045/commits/bb8bbc5bd0fdb2b61b23f957658ebf7cb064e30f))
+- 代理HK地区番剧(目前Vercel仅提供`hkg1`节点)
 - 搜索替换(配置中fs开头配置)
-- 自部署黑/白名单(使用NOTION作数据库)
+- 自部署黑/白名单(使用NOTION/PostgreSQL作数据库)
 
 ## 部署方法
 
@@ -18,8 +19,9 @@
 查看Wiki：  
 [配置文档填写说明](https://github.com/bili-vd-bak/biliroaming-ts-server-vercel/wiki/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)  
 **注**：每个服务只可代理一个地区，若需代理多个地区，请再部署一个相同的服务修改配置。  
-查寻缓存和日志请访问`https://{yourDomain}/api/admin/log?s=${配置填写的secret}`  
-清理缓存和日志请访问`https://{yourDomain}/api/admin/clean?s=${配置填写的secret}`  
+查寻本地缓存和日志请访问`https://{yourDomain}/api/admin/log?s=${配置填写的secret}`  
+清理本地缓存和日志请访问`https://{yourDomain}/api/admin/clean?s=${配置填写的secret}`  
+**注**: 本地缓存和日志在Vercel环境里无法长期存储，你可以查看Vercel自带的函数日志。  
 
 ### Vercel
 
@@ -68,6 +70,7 @@ pnpm i
 
 ## TODO
 
+- 提供自动初始化数据库能力
 - [BETA]Vercel支持新加坡节点，可以为东南亚地区解锁。(然后就被风控用不了了)  
 
 ## 开源信息
