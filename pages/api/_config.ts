@@ -188,12 +188,12 @@ export const try_unblock_CDN_speed_enabled: io = 1;
 export const cache_time = 1000 * 60 * 15;
 //本地模式设置
 //本地模式开关
-export const db_local_enabled: io = 1;
+export const db_local_enabled: io = 0;
 //本地数据库查询密钥
 export const local_cache_secret = process.env.local_cache_secret || "";
 //PostgreSQL配置(需Read/Write权限)
 import { Pool } from "pg"; //导入(不用改)
-export const db_bitio_enabled: io = 0; //启用postgresql数据库
+export const db_bitio_enabled: io = 1; //启用postgresql数据库
 const connectionString =
   process.env.db_bitio_pool ||
   "postgresql://用户名:秘钥@服务器域名:端口/数据库名"; //配置数据库链接
