@@ -1,5 +1,4 @@
 import { version, ver_min } from "./api/_config";
-
 function HomePage() {
   return (
     <>
