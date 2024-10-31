@@ -233,14 +233,14 @@ export const whitelist_vip_enabled: io = 0;
 
 //===================获取公共黑白名单============================
 //功能开关 1-开 0-关
-export const public_blacklist_enabled: io = 1;
+export const public_blacklist_enabled: io = 0;
 //公共黑名单地址 要求：URL后需可以直接加 UID/mid
 export const public_blacklist: string = "https://black.qimo.ink/api/users/";
 //============================================================
 
 //=====================限制API调用=============================
 //要求登录 1-开 0-关
-export const need_login: io = 1;
+export const need_login: io = 0;
 //允许WEB版使用(B站官网可直接请求,无需开启此选项) 1-开 0-关
 export const web_on: io = 1;
 //允许Referer为 https://www.bilibili.com 的请求而无需打开web_on (解决BBDown问题) 1-开 0-关
